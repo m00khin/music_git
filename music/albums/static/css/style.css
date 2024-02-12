@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+/*    background: blue;*/
+/*    margin: 0;*/
+/*    line-height: unset;*/
+    font-family: var(--bs-font-sans-serif);
+    padding-top: 3rem;
+/*    margin-bottom: 50px;*/
+}
+
+img {
+    height: 240px;
+    width: 240px;
+}
+
+.dropdown-menu {
+/*    background-color: antiquewhite;
+    background-color: transparent;*/
+    font-size: 14px;
+}

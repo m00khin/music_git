@@ -1,0 +1,55 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <p class="modal-title fs-5">{{ title }}</p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+    </div>
+    <div class="modal-body">
+        <form
+            class="form-control"
+            enctype="multipart/form-data"
+            hx-post="{{ request.path }}"
+            hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>
+
+            <div class="col-12">
+                <label class="col-form-label">Исполнитель:</label><br>
+                {{ form.artist }}
+            </div>
+            <div class="col-12">
+                <label class="col-form-label">Название альбома:</label>
+                {{ form.name }}
+            </div>
+            <div class="col-12">
+                <div class="row g-3">
+                    <div class="col-10">
+                        <label class="col-form-label">Издатель:</label><br>
+                        {{ form.maker }}
+                    </div>
+                    <div class="col-2">
+                        <label class="col-form-label">Релиз:</label>
+                        {{ form.year }}
+                    </div>
+                </div>
+            </div>
+
+            {% if album %}
+            <img src="covers/{{ album.cover }}" class="p-2 mx-auto d-block">
+            {% endif %}
+            <div class="mb-3">
+                <label class="col-form-label">Обложка:</label>
+                {{ form.cover }}
+            </div>
+
+            <div class="modal-footer">
+                {% if album %}
+                <button
+                    hx-post="{% url 'album_delete' pk=album.pk %}"
+                    type="button" class="btn btn-outline-danger">Удалить</button>
+                    <span class="flex-grow-1"></span>
+                {% endif %}
+
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Отмена</button>
+                <button type="submit" class="btn btn-outline-primary" id="submit">Сохранить</button>
+            </div>
+        </form>
+    </div>
+</div>

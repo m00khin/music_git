@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="d-flex">
+<!--    <div class="p-2 w-100 flex-column bg-light">-->
+    <div class="p-2 w-100 flex-column">
+
+        {% for album in albums %}
+
+        <div class="p-1 mb-1 float-start" style="box-shadow: 4px 4px 4px #ccc">
+            <div class="position-relative" style="color:white;">
+                <img src="covers/{{ album.cover }}" alt="">
+                <span class="bi bi-eye pe-2 position-absolute top-0 end-0 fs-5"></span>
+            </div>
+            <div class="d-flex">
+                <div class="w-100 align-items-baseline" style="font-size: smaller">
+                    <div class="text-center fw-semibold">
+                       {{ album.artist }}
+                    </div>
+                    <div class="text-center fst-italic">
+                       {{ album.name }} &#169 {{ album.year }}
+                    </div>
+                </div>
+
+                <a hx-get="{% url 'album_edit' pk=album.pk %}"
+                   hx-target="#dialog"
+                   class="flex-shrink-1 align-self-center">
+                    <span class="bi bi-pencil-square pe-2 fs-5"></span>
+                </a>
+            </div>
+        </div>
+
+        {% empty %}
+
+        <p class="p-2 w-100 fs-6 text-center text-danger">В базе нет записей</p>
+
+        {% endfor %}
+
+    </div>
+    <div class="p-2 flex-column flex-shrink-1">
+        <button
+            hx-get="{% url 'album_add' %}"
+            hx-target="#dialog"
+            class="btn btn-outline-primary btn-sm d-block mr-auto"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false">Добавить
+        </button>
+<!--            data-bs-toggle="modal"-->
+<!--            data-bs-target="#modal"-->
+    </div>
+</div>
+{% endblock %}
+
+{% block extrascripts %}{% endblock extrascripts %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'include/header.html' %}
+
+<div
+	hx-trigger="load, albumsChanged from:body"
+	hx-get="{% url 'album_list' %}"
+	hx-target="this">
+</div>
+
+<div id="modal" class="modal fade">
+	<div id="dialog" class="modal-dialog" hx-target="this"></div>
+</div>
+
+{% include 'include/footer.html' %}
+
+{% endblock%}
