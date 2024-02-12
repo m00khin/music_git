@@ -8,12 +8,12 @@ from .forms import *
 
 def index(request):
     context = dict(title='Главная страница')
-    return render(request, 'albums/albums_load.html', context)
+    return render(request, 'albums/album_load.html', context)
 
 
 def album_list(request):
     context = dict(title='Список альбомов', albums=Album.objects.all().order_by('artist'))
-    return render(request, 'albums/albums_list.html', context)
+    return render(request, 'albums/album_list.html', context)
 
 
 def album_add(request):
@@ -25,7 +25,7 @@ def album_add(request):
     else:
         form = AlbumsForm()
         context = dict(form=form, title='Добавление нового альбома')
-        return render(request, 'albums/albums_form.html', context)
+        return render(request, 'albums/album_form.html', context)
 
 
 def cover_tree(album):
@@ -46,11 +46,11 @@ def album_edit(request, pk):
         # else:
         #     form = AlbumsForm(instance=album)
         #     context = dict(form=form, album='album', title='Редактирование_альбома')
-        #     return render(request, 'albums/albums_form.html', context)
+        #     return render(request, 'albums/album_form.html', context)
     else:
         form = AlbumsForm(instance=album)
         context = dict(form=form, album=album, title='Редактирование альбома')
-        return render(request, 'albums/albums_form.html', context)
+        return render(request, 'albums/album_form.html', context)
 
 
 def album_delete(request, pk):
