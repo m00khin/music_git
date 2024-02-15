@@ -12,9 +12,9 @@ class AlbumAdmin(admin.ModelAdmin):
     # list_filter = ('is_published', 'time_create')
     # prepopulated_fields = {"slug": ("title",)}
 
-# @admin.register(Sounds)
-# class SoundsAdmin(admin.ModelAdmin):
-#     list_display = ('album_id', 'track_no', 'track_name', 'track_time')
+@admin.register(Song)
+class SoundAdmin(admin.ModelAdmin):
+    list_display = ('album_key', 'track_no', 'track_name', 'track_artist', 'track_time')
 
     # def track_time(self, obj):
     #     return obj.timefield.strftime('%H:%M%:%S')

@@ -1,9 +1,12 @@
 import shutil
 from django.conf import settings
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404
+# from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
+# from django.views.generic import ListView
 from .forms import *
+from .models import *
 
 
 def index(request):
@@ -16,7 +19,7 @@ def album_list(request):
     return render(request, 'albums/album_list.html', context)
 
 
-def album_add(request):
+def album_create(request):
     if request.method == 'POST':
         form = AlbumsForm(request.POST, request.FILES)
         if form.is_valid():
@@ -32,9 +35,9 @@ def cover_tree(album):
     return '.' + settings.MEDIA_URL + album.cover.name.rsplit('/cover.jpg', 1)[0]
 
 
-def album_edit(request, pk):
+def album_update(request, pk):
     album = get_object_or_404(Album, pk=pk)
-    tree_path = cover_tree(album)
+    # tree_path = cover_tree(album)
     if request.method == 'POST':
         form = AlbumsForm(request.POST, request.FILES, instance=album)
         if form.is_valid():
@@ -67,3 +70,23 @@ def album_remove(request, pk):
     shutil.rmtree(tree_path, ignore_errors=False)
     album.delete()
     return HttpResponse(status=204, headers={'HX-Trigger': 'albumsChanged'})
+
+
+def album_tracks(request, pk):
+    # songs = Song.objects.using('archived').all()
+    albums = get_object_or_404(Album, pk=pk)
+    # albums = Album.objects.all().filter(pk=pk)
+    # albums = Album.objects.filter(pk=pk)
+    # songs = Song.objects.filter(album_key=pk)
+    # songs = Song.objects.all().filter(album_key=pk)
+    # songs = get_list_or_404(Song, album_key=pk)
+    songs = Song.objects.filter(album_key=pk)
+    context = {'songs': songs, 'album': albums}
+    # context = {'album': album, 'songs': Song.objects.all().filter(album_id_id=pk), 'title': 'Список композиций'}
+    # context = {'album': album, 'title': 'Список композиций'}
+    # return render(request, 'albums/track_list.html', {'songs': songs})
+    # return render(request, 'albums/track_list.html', {'album': albums})
+    return render(request, 'albums/track_list.html', context)
+
+# def add_tracks(request):
+#     pass

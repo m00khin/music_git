@@ -1,3 +1,5 @@
+import datetime
+
 from django.core.files.storage import FileSystemStorage
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
@@ -31,7 +33,7 @@ class Album(models.Model):
     cover = models.ImageField(upload_to=upload_cover, storage=RewriteStorage(), verbose_name='Обложка')
 
     def __str__(self):
-        return f'{self.artist} "{self.name}" (p)(c){self.year} {self.maker}'
+        return f'{self.artist} {self.year} "{self.name}"'
 
     def get_absolute_url(self):
         return self.pk
@@ -41,17 +43,26 @@ class Album(models.Model):
         verbose_name_plural = 'Альбомы'
         ordering = ['artist', 'year']
 
-# class Sounds(models.Model):
-#     album_id = models.ForeignKey(Albums, verbose_name='Album', on_delete=models.CASCADE)
-#     track_no = models.IntegerField(default=1, verbose_name='Track')
-#     track_name = models.CharField(max_length=128, verbose_name='Song')
-#     track_artist = models.CharField(max_length=128, verbose_name='Artist')
-#     track_time = models.TimeField(auto_now=False, auto_now_add=False, default='00:00:00', verbose_name='Length')
-#
-#     def __str__(self):
-#         return self.track_name
-#
-#     class Meta:
-#         verbose_name = 'Композиции'
-#         verbose_name_plural = 'Композиции'
-#         ordering = ['track_no']
+
+class Song(models.Model):
+    album_key = models.ForeignKey(Album, related_name='Songs', verbose_name='Album', on_delete=models.PROTECT)
+    # album_id = models.ForeignKey(Album, verbose_name='Album', on_delete=models.DO_NOTHING())
+    # track_no = models.AutoField(default=1, verbose_name='Track')
+    track_no = models.IntegerField(default=1, verbose_name='Track')
+    track_name = models.CharField(max_length=128, verbose_name='Song')
+    track_artist = models.CharField(max_length=128, verbose_name='Artist')
+    # track_time = models.TimeField(auto_now=False, auto_now_add=False, default='00:00:00', verbose_name='Length')
+    track_time = models.TimeField(default=datetime.time(0,0,0), verbose_name='Length')
+
+    def __str__(self):
+        return str(self.pk)
+
+
+    def get_absolute_url(self):
+        return self.album_key
+
+    #
+    class Meta:
+        verbose_name = 'Композиции'
+        verbose_name_plural = 'Композиции'
+        ordering = ['track_no']
