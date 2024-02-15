@@ -23,21 +23,33 @@
                             <td>{{ song.track_name }}</td>
                             <td>{{ song.track_artist }}</td>
                             <td>{{ song.track_time }}</td>
+                            <td class="text-center">
+                                <a href="#">
+                                    <span class="bi bi-pencil-fill text-warning"></span>
+                                </a>
+                                <a href="#">
+                                    <span class="bi bi-plus text-success fs-2 fw-bold"></span>
+                                </a>
+
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         {% else %}
             <div class="d-flex flex-row">
-                <div class="p-2 w-100">
-                    <p class="p-2 w-100 fs-6 text-center text-danger">Список композиций пуст</p>
+                <div class="p-2 w-100 align-items-center">
+                    <p class="p-2 w-100 fs-5 text-center text-danger">Список композиций пуст</p>
                 </div>
-                <div class="p-2 flex-shrink-1">
-                    <button
-                            hx-get="#"
-                            hx-target="#dialog"
-                            class="btn btn-outline-primary btn-sm d-block mr-auto">Добавить
-                    </button>
+                <div class="p-2 flex-shrink-1 align-self-center">
+                    <a href="#">
+                        <i class="bi bi-plus-square text-success fs-3"></i>
+                    </a>
+{#                    <button class="btn btn-outline-primary btn-sm d-block mr-auto">Добавить#}
+{#                            hx-get="#"#}
+{#                            hx-target="#dialog"#}
+{#                    </button>#}
+
                 </div>
             </div>
         {% endif %}
