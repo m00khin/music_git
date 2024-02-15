@@ -73,19 +73,9 @@ def album_remove(request, pk):
 
 
 def album_tracks(request, pk):
-    # songs = Song.objects.using('archived').all()
     albums = get_object_or_404(Album, pk=pk)
-    # albums = Album.objects.all().filter(pk=pk)
-    # albums = Album.objects.filter(pk=pk)
-    # songs = Song.objects.filter(album_key=pk)
-    # songs = Song.objects.all().filter(album_key=pk)
-    # songs = get_list_or_404(Song, album_key=pk)
     songs = Song.objects.filter(album_key=pk)
     context = {'songs': songs, 'album': albums}
-    # context = {'album': album, 'songs': Song.objects.all().filter(album_id_id=pk), 'title': 'Список композиций'}
-    # context = {'album': album, 'title': 'Список композиций'}
-    # return render(request, 'albums/track_list.html', {'songs': songs})
-    # return render(request, 'albums/track_list.html', {'album': albums})
     return render(request, 'albums/track_list.html', context)
 
 # def add_tracks(request):

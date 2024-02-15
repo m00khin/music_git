@@ -5,29 +5,42 @@
     </div>
 
     <div class="modal-body">
-        <table class="table table-sm table-hover">
-            <thead class="fw-bold">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Название</th>
-                <th scope="col">Исполнитель</th>
-                <th scope="col">Время</th>
-                <th scope="col">Действие</th>
-            </tr>
-            </thead>
-{#            <tbody class="table-group-divider fw-light">#}
-            <tbody class="table-group-divider border-info">
-            {% for song in songs %}
-                <tr class="fst-italic">
-                    <td>{{ song.track_no }}.</td>
-                    <td>{{ song.track_name }}</td>
-                    <td>{{ song.track_artist }}</td>
-                    <td>{{ song.track_time }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-{#            <tfoot> Подвал</tfoot>#}
-        </table>
+        {% if songs %}
+            <table class="table table-sm table-hover">
+                <thead class="fw-bold">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Название</th>
+                        <th scope="col">Исполнитель</th>
+                        <th scope="col">Время</th>
+                        <th scope="col">Действие</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider border-info">
+                    {% for song in songs %}
+                        <tr class="fst-italic">
+                            <td>{{ song.track_no }}.</td>
+                            <td>{{ song.track_name }}</td>
+                            <td>{{ song.track_artist }}</td>
+                            <td>{{ song.track_time }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="d-flex flex-row">
+                <div class="p-2 w-100">
+                    <p class="p-2 w-100 fs-6 text-center text-danger">Список композиций пуст</p>
+                </div>
+                <div class="p-2 flex-shrink-1">
+                    <button
+                            hx-get="#"
+                            hx-target="#dialog"
+                            class="btn btn-outline-primary btn-sm d-block mr-auto">Добавить
+                    </button>
+                </div>
+            </div>
+        {% endif %}
     </div>
 
     <div class="modal-footer">
@@ -37,28 +50,3 @@
     </div>
 
 </div>
-{#{% extends 'base.html' %}#}
-{##}
-{#{% block content %}#}
-{##}
-{#{% include 'include/header.html' %}#}
-{##}
-{#    <div class="card mb-3" style="max-width: 540px;">#}
-{#        <div class="row g-0">#}
-{#            <div class="col-md-4">#}
-{#                <img src="..." class="img-fluid rounded-start" alt="...">#}
-{#            </div>#}
-{#            <div class="col-md-8">#}
-{#                <div class="card-body">#}
-{#                    <h5 class="card-title">Заголовок карточки</h5>#}
-{#                    <p class="card-text">Это более широкая карта с вспомогательным текстом ниже в качестве естественного#}
-{#                        перехода к дополнительному контенту. Этот контент немного длиннее.</p>#}
-{#                    <p class="card-text"><small class="text-muted">Последнее обновление 3 мин. назад</small></p>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{##}
-{#{% include 'include/footer.html' %}#}
-{##}
-{#{% endblock%}#}
