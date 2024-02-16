@@ -1,0 +1,16 @@
+{% for song in album.Songs.all %}
+    <tr class="fst-italic">
+        <td>{{ song.track_no }}.</td>
+        <td>{{ song.track_name }}</td>
+        <td>{{ song.track_artist }}</td>
+        <td>{{ song.track_time | time:"H:i:s" }}</td>
+        <td class="text-center">
+            <a href="#">
+                <i class="bi bi-pencil text-warning"></i>
+            </a>
+            <a href="#">
+                <i class="bi bi-trash text-danger"></i>
+            </a>
+        </td>
+    </tr>
+{% endfor %}

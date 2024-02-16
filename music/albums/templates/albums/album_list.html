@@ -12,7 +12,6 @@
                 <img src="covers/{{ album.cover }}" alt="">
                 <a hx-get="{% url 'album_tracks' pk=album.pk %}"
                    hx-target="#dialog">
-{#                   <span class="bi bi-info-square p-1 position-absolute bottom-0 end-0 fs-5"></span>#}
                    <span class="bi bi-info-circle p-1 position-absolute bottom-0 end-0 fs-5"></span>
                 </a>
             </div>
@@ -24,7 +23,7 @@
                     </div>
 
                     <div class="text-center fst-italic">
-                       {{ album.name }} &#169 {{ album.year }}
+                       {{ album.name }} <i class="bi bi-c-circle"></i> {{ album.year }}
                     </div>
                 </div>
 
@@ -47,7 +46,7 @@
         <button
             hx-get="{% url 'album_create' %}"
             hx-target="#dialog"
-            class="btn btn-outline-primary btn-sm d-block mr-auto">Добавить
+            class="btn btn-sm btn-outline-primary block mr-auto">Добавить
         </button>
     </div>
 </div>

@@ -1,15 +1,16 @@
 <div class="modal-content">
-    <div class="modal-header">
-        <p class="modal-title fs-5">{{ title }}</p>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-    </div>
-    <div class="modal-body">
-        <form
-            class="form-control"
-            enctype="multipart/form-data"
-            hx-post="{{ request.path }}"
-            hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>
+    <form
+        class="form-control"
+        enctype="multipart/form-data"
+        hx-post="{{ request.path }}"
+        hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>
 
+        <div class="modal-header">
+            <p class="modal-title fs-5">{{ title }}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+
+        <div class="modal-body">
             <div class="col-12">
                 <label class="col-form-label">Исполнитель:</label><br>
                 {{ form.artist }}
@@ -18,41 +19,40 @@
                 <label class="col-form-label">Название альбома:</label>
                 {{ form.name }}
             </div>
-            <div class="col-12">
-                <div class="row g-3">
-                    <div class="col-9">
-                        <label class="col-form-label">Издатель:</label><br>
-                        {{ form.maker }}
-                    </div>
-                    <div class="col-3">
-                        <label class="col-form-label">Релиз:</label>
-                        {{ form.year }}
-                    </div>
+            <div class="row g-3">
+                <div class="col-9">
+                    <label class="col-form-label">Издатель:</label><br>
+                    {{ form.maker }}
+                </div>
+                <div class="col-3">
+                    <label class="col-form-label">Релиз:</label>
+                    {{ form.year }}
                 </div>
             </div>
 
             {% if album %}
-            <img src="covers/{{ album.cover }}" class="p-2 mx-auto d-block">
+                <img src="covers/{{ album.cover }}" class="p-2 mx-auto d-block" alt="">
             {% endif %}
             <div class="mb-3">
                 <label class="col-form-label">Обложка:</label>
-                {{ form.cover }}
+                    {{ form.cover }}
                 <div class="invalid-feedback">
                     {{ form.cover.errors|first }}
                 </div>
             </div>
+        </div>
 
-            <div class="modal-footer">
-                {% if album %}
+        <div class="modal-footer">
+            {% if album %}
                 <button
                     hx-post="{% url 'album_delete' pk=album.pk %}"
-                    type="button" class="btn btn-outline-danger">Удалить</button>
-                    <span class="flex-grow-1"></span>
-                {% endif %}
+                    type="button" class="btn btn-sm btn-outline-danger">Удалить
+                </button>
+                <span class="flex-grow-1"></span>
+            {% endif %}
 
-                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Отмена</button>
-                <button type="submit" class="btn btn-outline-primary" id="submit">Сохранить</button>
-            </div>
-        </form>
-    </div>
+            <button type="button" class="btn btn-sm btn-outline-dark" data-bs-dismiss="modal">Отмена</button>
+            <button type="submit" class="btn btn-sm btn-outline-primary" id="submit">Сохранить</button>
+        </div>
+    </form>
 </div>

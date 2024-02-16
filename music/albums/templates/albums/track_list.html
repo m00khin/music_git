@@ -5,7 +5,7 @@
     </div>
 
     <div class="modal-body">
-        {% if songs %}
+        {% if album.Songs.all %}
             <table class="table table-sm table-hover">
                 <thead class="fw-bold">
                     <tr>
@@ -16,24 +16,10 @@
                         <th scope="col">Действие</th>
                     </tr>
                 </thead>
-                <tbody class="table-group-divider border-info">
-                    {% for song in songs %}
-                        <tr class="fst-italic">
-                            <td>{{ song.track_no }}.</td>
-                            <td>{{ song.track_name }}</td>
-                            <td>{{ song.track_artist }}</td>
-                            <td>{{ song.track_time }}</td>
-                            <td class="text-center">
-                                <a href="#">
-                                    <span class="bi bi-pencil-fill text-warning"></span>
-                                </a>
-                                <a href="#">
-                                    <span class="bi bi-plus text-success fs-2 fw-bold"></span>
-                                </a>
-
-                            </td>
-                        </tr>
-                    {% endfor %}
+                <tbody class="table-group-divider border-info"
+                    hx-trigger="load, songsChanged from:body"
+                    hx-get="{% url 'track_loader' pk=album.pk %}"
+                    hx-target="this">
                 </tbody>
             </table>
         {% else %}
@@ -45,18 +31,19 @@
                     <a href="#">
                         <i class="bi bi-plus-square text-success fs-3"></i>
                     </a>
-{#                    <button class="btn btn-outline-primary btn-sm d-block mr-auto">Добавить#}
-{#                            hx-get="#"#}
-{#                            hx-target="#dialog"#}
-{#                    </button>#}
-
                 </div>
             </div>
         {% endif %}
     </div>
 
     <div class="modal-footer">
-        <small>{{ album.year  }} &#169 {{ album.maker }}</small>
+        <button
+            class="btn btn-outline-primary btn-sm">Добавить</button>
+            <span class="flex-grow-1"></span>
+{#        <a href="#">#}
+{#            <span class="flex-grow-1 bi bi-plus text-success fs-2 fw-bold"></span>#}
+{#                                </a>#}
+        <small>{{ album.year  }} <i class="bi bi-c-circle fs-6"></i> {{ album.maker }}</small>
 {#        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Закрыть</button>#}
 {#        <button type="submit" class="btn btn-outline-primary" id="submit">Сохранить</button>#}
     </div>

@@ -14,15 +14,10 @@ class AlbumAdmin(admin.ModelAdmin):
 
 @admin.register(Song)
 class SoundAdmin(admin.ModelAdmin):
-    list_display = ('album_key', 'track_no', 'track_name', 'track_artist', 'track_time')
+    list_display = ('album_key', 'track_no', 'track_name', 'track_artist', 'length')
 
-    # def track_time(self, obj):
-    #     return obj.timefield.strftime('%H:%M%:%S')
-        # return obj.result_value.strftime('%H:%M%:%S')
-    #
-    # formfield_overrides = {
-    #     models.TimeField: {'widget': widgets.TimeInput(format='%H:%M:%S')},
-    # }
+    def length(self, obj):
+        return obj.track_time.strftime('%H:%M:%S')
 
 # admin.site.register(Albums, AlbumsAdmin)
 # admin.site.register(Sounds, SoundsAdmin)

@@ -25,6 +25,8 @@ def album_create(request):
         if form.is_valid():
             form.save()
             return HttpResponse(status=204, headers={'HX-Trigger': 'albumsChanged'})
+        # else:
+        #     return render(request, 'albums/album_form.html', {'form': form})
     else:
         form = AlbumsForm()
         context = dict(form=form, title='Добавление нового альбома')
@@ -73,10 +75,10 @@ def album_remove(request, pk):
 
 
 def album_tracks(request, pk):
-    albums = get_object_or_404(Album, pk=pk)
-    songs = Song.objects.filter(album_key=pk)
-    context = {'songs': songs, 'album': albums}
+    context = {'album': get_object_or_404(Album, pk=pk)}
     return render(request, 'albums/track_list.html', context)
 
-# def add_tracks(request):
-#     pass
+def tracks_load(request, pk):
+    context = {'album': get_object_or_404(Album, pk=pk)}
+    return render(request, 'albums/track_load.html', context)
+
