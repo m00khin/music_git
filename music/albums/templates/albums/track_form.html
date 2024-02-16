@@ -1,0 +1,23 @@
+<div class="modal-content">
+    <form
+        class="form-control"
+        hx-post="{{ request.path }}"
+        hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>
+
+        <div class="modal-header">
+            <p class="modal-title fs-5">{{ title }}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="modal-body">
+        {{ form.as_p }}
+        </div>
+        <div class="modal-footer">
+            <button
+                type="button"
+                class="btn btn-sm btn-outline-dark"
+                hx-get="{% url 'album_tracks' pk=form.pk %}"
+                hx-target="#dialog"
+                data-bs-toggle="modal">Отмена</button>
+        </div>
+    </form>
+</div>

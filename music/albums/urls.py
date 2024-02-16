@@ -10,9 +10,11 @@ urlpatterns = [
     path('album/<int:pk>/remove', views.album_remove, name='album_remove'),
     path('album/<int:pk>/tracks', views.album_tracks, name='album_tracks'),
     path('album/<int:pk>/content', views.tracks_load, name='track_loader'),
+    path('album/<int:pk>/tracks/add', views.create_track, name='track_create'),
 ]
 #
-# path('albums/song/add', views.add_tracks, name='add_tracks'),
+#path('albums/song/add', views.create_track, name='track_create'),
+#
 # path('albums/song/<int:pk>/change', views.add_tracks, name='add_tracks'),
 # path('albums/song/<int:pk>/delete', views.add_tracks, name='add_tracks'),
 

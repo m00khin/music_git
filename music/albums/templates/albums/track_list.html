@@ -23,29 +23,20 @@
                 </tbody>
             </table>
         {% else %}
-            <div class="d-flex flex-row">
-                <div class="p-2 w-100 align-items-center">
-                    <p class="p-2 w-100 fs-5 text-center text-danger">Список композиций пуст</p>
-                </div>
-                <div class="p-2 flex-shrink-1 align-self-center">
-                    <a href="#">
-                        <i class="bi bi-plus-square text-success fs-3"></i>
-                    </a>
-                </div>
+            <div class="p-2 w-100 align-items-center">
+                <p class="p-2 w-100 fs-5 text-center text-danger">Список композиций пуст</p>
             </div>
         {% endif %}
     </div>
 
     <div class="modal-footer">
         <button
-            class="btn btn-outline-primary btn-sm">Добавить</button>
+            class="btn btn-outline-primary btn-sm"
+            hx-get="{% url 'track_create' pk=album.pk %}"
+            hx-target="#tracks">Добавить</button>
             <span class="flex-grow-1"></span>
-{#        <a href="#">#}
-{#            <span class="flex-grow-1 bi bi-plus text-success fs-2 fw-bold"></span>#}
-{#                                </a>#}
-        <small>{{ album.year  }} <i class="bi bi-c-circle fs-6"></i> {{ album.maker }}</small>
+        <small>{{ album.year }} <i class="bi bi-c-circle fs-6"></i> {{ album.maker }}</small>
 {#        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Закрыть</button>#}
 {#        <button type="submit" class="btn btn-outline-primary" id="submit">Сохранить</button>#}
     </div>
-
 </div>

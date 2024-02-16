@@ -48,10 +48,6 @@ def album_update(request, pk):
             #     shutil.rmtree(tree_path, ignore_errors=False)
             form.save()
             return HttpResponse(status=204, headers={'HX-Trigger': 'albumsChanged'})
-        # else:
-        #     form = AlbumsForm(instance=album)
-        #     context = dict(form=form, album='album', title='Редактирование_альбома')
-        #     return render(request, 'albums/album_form.html', context)
     else:
         form = AlbumsForm(instance=album)
         context = dict(form=form, album=album, title='Редактирование альбома')
@@ -81,4 +77,16 @@ def album_tracks(request, pk):
 def tracks_load(request, pk):
     context = {'album': get_object_or_404(Album, pk=pk)}
     return render(request, 'albums/track_load.html', context)
+
+
+def create_track(request, pk):
+    if request.method == 'POST':
+        form = SongsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse(status=204, headers={'HX-Trigger': 'songsChanged'})
+    else:
+        form = SongsForm()
+        context = dict(form=form, title='Добавление композиции')
+        return render(request, 'albums/track_form.html', context)
 
