@@ -124,6 +124,9 @@ USE_TZ = True
 
 # TIME_FORMAT = '%H:%M:%S'
 # TIME_FORMAT = '%H:%i:%s'
+TIME_INPUT_FORMATS = [
+    '%H:%M:%S',
+]
 # TIME_INPUT_FORMAT = [
 #     '%H:%M:%S',
 #     '%H:%i:%s'

@@ -21,13 +21,19 @@ class SongsForm(forms.ModelForm):
     track_no = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
     track_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     track_artist = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    track_time = forms.TimeField(
-        widget=forms.TimeInput(format='%H:%M:%S', attrs={'class': 'form-control', 'type': 'time'}))
+
+    # track_time= forms.TimeInput(format='%H:%M:%S', attrs={'class': 'form-control', 'type': 'time', 'style': '8ch'})
+    track_time = forms.TimeField(input_formats=['%H:%M:$S'],
+        widget=forms.TimeInput(format=['%H:%M:%S'], attrs={'class': 'form-control', 'style': '8ch'}))
+    #     # widget=forms.TimeInput(format='%H:%M:%S', attrs={'class': 'form-control', 'type': 'time'}))
+
 
     class Meta:
         model = Song
         fields = ['track_no', 'track_name', 'track_artist', 'track_time']
-
+        # fields = '__all__'
+    # def length(self, obj):
+    #     return obj.track_time.strftime('%H:%M:%S')
 # def __init__(self, *args, **kwargs):
 #     super().__init__(*args, **kwargs)
 #

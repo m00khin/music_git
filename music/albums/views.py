@@ -87,6 +87,6 @@ def create_track(request, pk):
             return HttpResponse(status=204, headers={'HX-Trigger': 'songsChanged'})
     else:
         form = SongsForm()
-        context = dict(form=form, title='Добавление композиции')
+        context = dict(form=form, album=get_object_or_404(Album, pk=pk), title='Добавление композиции')
         return render(request, 'albums/track_form.html', context)
 

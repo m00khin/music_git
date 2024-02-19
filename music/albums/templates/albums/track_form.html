@@ -5,19 +5,40 @@
         hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>
 
         <div class="modal-header">
-            <p class="modal-title fs-5">{{ title }}</p>
+            <p class="modal-title fs-5 fst-italic fw-bold">{{ album.name }} / {{ album.artist }}</p>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
         </div>
         <div class="modal-body">
-        {{ form.as_p }}
+            <div class="col">
+                <label class="col-form-label">Композиция:</label>
+                {{ form.track_name }}
+            </div>
+            <div class="col">
+                <label class="col-form-label">Исполнитель:</label>
+                {{ form.track_artist }}
+            </div>
+
+            <div class="row">
+            <div class="col-3">
+                <label class="col-form-label">#</label>
+                {{ form.track_no }}
+            </div>
+
+            <div class="col-3">
+                <label class="col-form-label">Продолжительность:</label>
+                {{ form.track_time }}
+            </div>
+            </div>
+{#        {{ form.track_time| time:"H:i:s" }}#}
+{#        {{ form.as_p }}#}
         </div>
         <div class="modal-footer">
             <button
                 type="button"
                 class="btn btn-sm btn-outline-dark"
-                hx-get="{% url 'album_tracks' pk=form.pk %}"
+                hx-get="{% url 'album_tracks' pk=album.pk %}"
                 hx-target="#dialog"
-                data-bs-toggle="modal">Отмена</button>
+                data-bs-dismiss="modal">Отмена</button>
         </div>
     </form>
 </div>

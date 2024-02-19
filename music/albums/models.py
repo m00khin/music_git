@@ -51,7 +51,8 @@ class Song(models.Model):
     track_no = models.IntegerField(default=1, verbose_name='Track')
     track_name = models.CharField(max_length=128, verbose_name='Song')
     track_artist = models.CharField(max_length=128, verbose_name='Artist')
-    track_time = models.TimeField(default=datetime.time(0,0,0, tzinfo=None), verbose_name='Length')
+    track_time = models.TimeField(default='00:00:00', verbose_name='Length')
+    # track_time = models.TimeField(default=datetime.time(0,0,0, tzinfo=None), verbose_name='Length')
 
     def __str__(self):
         # return self.track_time.strftime("%H:%M:%S")
