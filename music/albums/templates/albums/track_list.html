@@ -33,8 +33,10 @@
         <button
             class="btn btn-outline-primary btn-sm"
             hx-get="{% url 'track_create' pk=album.pk %}"
-            hx-target="#dialog">Добавить</button>
-            <span class="flex-grow-1"></span>
+            hx-target="#dialog">Добавить
+{#            data-bs-dismiss="modal"#}
+        </button>
+        <span class="flex-grow-1"></span>
         <small>{{ album.year }} <i class="bi bi-c-circle fs-6"></i> {{ album.maker }}</small>
 {#        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Закрыть</button>#}
 {#        <button type="submit" class="btn btn-outline-primary" id="submit">Сохранить</button>#}
