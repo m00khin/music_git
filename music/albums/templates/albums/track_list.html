@@ -5,24 +5,23 @@
     </div>
 
     <div class="modal-body">
-        {% if album.Songs.all %}
-            <table class="table table-sm table-hover">
-                <thead class="fw-bold">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Название</th>
-                        <th scope="col">Исполнитель</th>
-                        <th scope="col">Время</th>
-                        <th scope="col">Действие</th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider border-info"
-                    hx-trigger="load, songsChanged from:body"
-                    hx-get="{% url 'track_loader' pk=album.pk %}"
-                    hx-target="this">
-                </tbody>
-            </table>
-        {% else %}
+        <table class="table table-sm table-hover">
+            <thead class="fw-bold">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Название</th>
+                <th scope="col">Исполнитель</th>
+                <th scope="col">Время</th>
+                <th scope="col">Действие</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider border-info"
+                   hx-trigger="load, songsChanged from:body"
+                   hx-get="{% url 'track_loader' pk=album.pk %}"
+                   hx-target="this">
+            </tbody>
+        </table>
+        {% if not album.Songs.all %}
             <div class="p-2 w-100 align-items-center">
                 <p class="p-2 w-100 fs-5 text-center text-danger">Список композиций пуст</p>
             </div>
@@ -37,7 +36,7 @@
 {#            data-bs-dismiss="modal"#}
         </button>
         <span class="flex-grow-1"></span>
-        <small>{{ album.year }} <i class="bi bi-c-circle fs-6"></i> {{ album.maker }}</small>
+        <small class="fst-italic">{{ album.year }} <i class="bi bi-c-circle fs-6"></i> {{ album.maker }}</small>
 {#        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Закрыть</button>#}
 {#        <button type="submit" class="btn btn-outline-primary" id="submit">Сохранить</button>#}
     </div>

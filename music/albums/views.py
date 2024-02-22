@@ -1,7 +1,7 @@
 import shutil
 from django.conf import settings
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 # from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
 # from django.views.generic import ListView
@@ -74,19 +74,27 @@ def album_tracks(request, pk):
     context = {'album': get_object_or_404(Album, pk=pk)}
     return render(request, 'albums/track_list.html', context)
 
+
 def tracks_load(request, pk):
     context = {'album': get_object_or_404(Album, pk=pk)}
     return render(request, 'albums/track_load.html', context)
 
 
-def create_track(request, pk):
+def tracks_add(request, pk):
+    album = get_object_or_404(Album, pk=pk)
     if request.method == 'POST':
         form = SongsForm(request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponse(status=204, headers={'HX-Trigger': 'songsChanged'})
+            Song.objects.create(
+                album_key=album,
+                track_no=form.cleaned_data.get('track_no'),
+                track_name=form.cleaned_data.get('track_name'),
+                track_artist=form.cleaned_data.get('track_artist'),
+                track_time=form.cleaned_data.get('track_time')
+            )
+            return redirect('album_tracks', pk=pk)
+            # return HttpResponse(status=204, headers={'HX-Trigger': 'songsChanged'})
     else:
         form = SongsForm()
-        context = dict(form=form, album=get_object_or_404(Album, pk=pk), title='Добавление композиции')
+        context = dict(form=form, album=album, title='Добавление композиции')
         return render(request, 'albums/track_form.html', context)
-

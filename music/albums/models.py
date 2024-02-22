@@ -46,10 +46,11 @@ class Album(models.Model):
 class Song(models.Model):
     album_key = models.ForeignKey(Album, related_name='Songs', verbose_name='Album', on_delete=models.PROTECT)
     # album_id = models.ForeignKey(Album, verbose_name='Album', on_delete=models.DO_NOTHING())
-    track_no = models.IntegerField(default=None, verbose_name='Track')
+    track_no = models.PositiveSmallIntegerField(default=None, verbose_name='Track')
     track_name = models.CharField(max_length=128, verbose_name='Song')
     track_artist = models.CharField(max_length=128, verbose_name='Artist')
-    track_time = models.TimeField(auto_now=False, auto_now_add=False, default='00:00:00', verbose_name='Length')
+    track_time = models.TimeField(default='00:00:00', verbose_name='Length')
+    # track_time = models.TimeField(unique=False, auto_now=False, auto_now_add=False, default='00:00:00', verbose_name='Length')
 
     # default=datetime.time(hour=0, minute=0, second=0, microsecond=0).isoformat(timespec='auto'),
     # verbose_name='Length')
@@ -59,14 +60,14 @@ class Song(models.Model):
     # track_time = models.TimeField(default='00:00:00', verbose_name='Length')
     # track_time = models.TimeField(default=datetime.time(0,0,0, tzinfo=None), verbose_name='Length')
 
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            next_track = self.album_key.Songs.all().order_by('track_no').last()
-            if not next_track:
-                self.track_no = 1
-            else:
-                self.track_no += 1
-        super(Song, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if not self.pk:
+    #         next_track = self.album_key.Songs.all().order_by('track_no').last()
+    #         if not next_track:
+    #             self.track_no = 1
+    #         else:
+    #             self.track_no += 1
+    #     super(Song, self).save(*args, **kwargs)
 
     def __str__(self):
         # return self.track_time.strftime("%H:%M:%S")

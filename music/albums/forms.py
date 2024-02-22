@@ -20,17 +20,18 @@ class AlbumsForm(forms.ModelForm):
 class SongsForm(forms.ModelForm):
     track_no = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
     track_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    track_artist = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    track_time = forms.TimeField(widget=forms.TimeInput(attrs={'class': 'form-control', 'type': 'time', 'step': '2'}))
+    track_artist = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    track_time = forms.TimeField(widget=forms.TimeInput(attrs={
+        'class': 'form-control',
+        'value': '00:00:00',
+        'style': 'text-align: center!important'
+    }))
+    #     'class': 'form-control',
+    #     'type': 'time',
+    #     'step': '2',
+    #     'value': '00:00:00'
+    # }))
 
-    # track_time = forms.TimeField(widget=forms.TimeInput(attrs={'class': 'form-control', 'step': '2'}))
-
-    # track_time= forms.TimeInput(format='%H:%M:%S', attrs={'class': 'form-control', 'type': 'time', 'style': '8ch'})
-
-    # track_time = forms.TimeField(input_formats=['%H:%M:$S'],
-    #     widget=forms.TimeInput(format=['%H:%M:%S'], attrs={'class': 'form-control', 'type': 'time', 'step': '2'}))
-
-    #     # widget=forms.TimeInput(format='%H:%M:%S', attrs={'class': 'form-control', 'type': 'time'}))
 
     class Meta:
         model = Song
