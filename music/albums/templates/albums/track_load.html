@@ -3,7 +3,7 @@
         <td>{{ song.track_no }}.</td>
         <td>{{ song.track_name }}</td>
         <td>{{ song.track_artist }}</td>
-        <td>{{ song.track_time | time:"H:i:s" }}</td>
+        <td>{{ song.track_time|time:'H:i:s' }}</td>
         <td class="text-center">
             <a href="#">
                 <i class="bi bi-pencil text-warning"></i>
@@ -13,10 +13,4 @@
             </a>
         </td>
     </tr>
-{#{% empty %}#}
-{#    <tr>#}
-{#        <td colspan="5">#}
-{#            <p class="p-2 w-100 fs-5 text-center text-danger">Список композиций пуст</p>#}
-{#        </td>#}
-{#    </tr>#}
 {% endfor %}

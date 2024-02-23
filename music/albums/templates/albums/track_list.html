@@ -15,11 +15,14 @@
                 <th scope="col">Действие</th>
             </tr>
             </thead>
-            <tbody class="table-group-divider border-info"
-                   hx-trigger="load, songsChanged from:body"
-                   hx-get="{% url 'track_loader' pk=album.pk %}"
-                   hx-target="this">
+            <tbody class="table-group-divider border-info">
+                {% include 'albums/track_load.html' %}
             </tbody>
+{#            <tbody class="table-group-divider border-info"#}
+{#                   hx-trigger="load, songsChanged from:body"#}
+{#                   hx-get="{% url 'track_loader' pk=album.pk %}"#}
+{#                   hx-target="this">#}
+{#            </tbody>#}
         </table>
         {% if not album.Songs.all %}
             <div class="p-2 w-100 align-items-center">

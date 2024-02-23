@@ -75,9 +75,9 @@ def album_tracks(request, pk):
     return render(request, 'albums/track_list.html', context)
 
 
-def tracks_load(request, pk):
-    context = {'album': get_object_or_404(Album, pk=pk)}
-    return render(request, 'albums/track_load.html', context)
+# def tracks_load(request, pk):
+#     context = {'album': get_object_or_404(Album, pk=pk)}
+#     return render(request, 'albums/track_load.html', context)
 
 
 def tracks_add(request, pk):

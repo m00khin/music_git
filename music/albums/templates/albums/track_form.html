@@ -6,7 +6,6 @@
 {#    </div>#}
 
     <form
-        class="form-control"
         hx-post="{{ request.path }}"
         hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>
 
@@ -14,42 +13,45 @@
             <p class="modal-title fs-5 fst-italic fw-bold">{{ album.name }} / {{ album.artist }}</p>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
         </div>
-        <div class="modal-body">
-            <div class="col">
-                <label class="col-form-label">Композиция:</label>
-                {{ form.track_name }}
-            </div>
-            <div class="col">
-                <label class="col-form-label">Исполнитель:</label>
-                {{ form.track_artist }}
-            </div>
 
-            <div class="row">
-                <div class="col-3">
-                    <label class="col-form-label">#</label>
+        <div class="modal-body">
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Композиция:</label>
+                <div class="col-sm-9">
+                    {{ form.track_name }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Исполнитель:</label>
+                <div class="col-sm-9">
+                    {{ form.track_artist }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Номер трека:</label>
+                <div class="col-sm-3">
                     {{ form.track_no }}
                 </div>
-
-                <div class="col-3">
-                    <label class="col-form-label">Время:</label>
+                <label class="col-sm-3 col-form-label">Длительность:</label>
+                <div class="col-sm-3">
                     {{ form.track_time }}
                 </div>
             </div>
 {#        {{ form.as_p }}#}
         </div>
+
         <div class="modal-footer">
             <button
                 class="btn btn-sm btn-outline-dark"
-                hx-get="{% url 'album_tracks' pk=album.pk %}"
-                hx-target="#dialog"
-                data-bs-dismiss="modal">Отмена</button>
+                hx-get="{% url 'album_tracks' pk=album.pk %}">Отмена</button>
+{#                hx-target="#dialog"#}
+{#                data-bs-dismiss="modal"#}
             <button
                 type="submit"
                 class="btn btn-sm btn-outline-primary">Сохранить
             </button>
 {#                hx-get="{% url 'album_tracks' pk=album.pk %}"#}
 {#                hx-target="#dialog">Сохранить#}
-
         </div>
     </form>
 </div>
