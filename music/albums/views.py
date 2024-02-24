@@ -9,7 +9,6 @@ from .forms import *
 from .models import *
 
 
-
 def index(request):
     context = dict(title='Главная страница')
     return render(request, 'albums/album_load.html', context)
@@ -117,6 +116,7 @@ def song_update(request, item):
         })
         context = dict(form=form, album=song.album_key, remove=False)
         return render(request, 'albums/track_form.html', context)
+
 
 def song_delete(request, item):
     song = get_object_or_404(Song, id=item)

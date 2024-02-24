@@ -26,12 +26,12 @@ class SongsForm(forms.ModelForm):
         'value': '00:00:00',
         'style': 'text-align: center!important'
     }))
+
     #     'class': 'form-control',
     #     'type': 'time',
     #     'step': '2',
     #     'value': '00:00:00'
     # }))
-
 
     class Meta:
         model = Song

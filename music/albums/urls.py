@@ -16,7 +16,7 @@ urlpatterns = [
 #
 # path('albums/album/<int:pk>/content', views.tracks_load, name='track_loader'),
 #
-#path('albums/song/add', views.create_track, name='track_create'),
+# path('albums/song/add', views.create_track, name='track_create'),
 #
 # path('albums/song/<int:pk>/change', views.add_tracks, name='add_tracks'),
 # path('albums/song/<int:pk>/delete', views.add_tracks, name='add_tracks'),

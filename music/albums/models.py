@@ -1,4 +1,3 @@
-# import datetime
 from django.core.files.storage import FileSystemStorage
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
@@ -62,7 +61,6 @@ class Song(models.Model):
     def __str__(self):
         # return self.track_time.strftime("%H:%M:%S")
         return str(self.pk)
-
 
     def get_absolute_url(self):
         return self.album_key
