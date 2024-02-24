@@ -1,10 +1,4 @@
 <div class="modal-content">
-{#    <div#}
-{#        hx-trigger="load, songsChanged from:body"#}
-{#        hx-get="{% url 'track_loader' pk=album.pk %}"#}
-{#        hx-target="this">#}
-{#    </div>#}
-
     <form
         hx-post="{{ request.path }}"
         hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>
@@ -43,15 +37,19 @@
         <div class="modal-footer">
             <button
                 class="btn btn-sm btn-outline-dark"
-                hx-get="{% url 'album_tracks' pk=album.pk %}">Отмена</button>
-{#                hx-target="#dialog"#}
-{#                data-bs-dismiss="modal"#}
-            <button
-                type="submit"
-                class="btn btn-sm btn-outline-primary">Сохранить
+                hx-get="{% url 'album_tracks' pk=album.pk %}">Отмена
             </button>
-{#                hx-get="{% url 'album_tracks' pk=album.pk %}"#}
-{#                hx-target="#dialog">Сохранить#}
+            {% if remove %}
+                <button
+                        type="submit"
+                        class="btn btn-sm btn-outline-danger">Удалить
+                </button>
+            {% else %}
+                <button
+                        type="submit"
+                        class="btn btn-sm btn-outline-primary">Сохранить
+                </button>
+            {% endif %}
         </div>
     </form>
 </div>

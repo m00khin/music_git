@@ -10,6 +10,8 @@ urlpatterns = [
     path('albums/album/<int:pk>/remove', views.album_remove, name='album_remove'),
     path('albums/album/<int:pk>/tracks', views.album_tracks, name='album_tracks'),
     path('albums/album/<int:pk>/song/add', views.tracks_add, name='track_create'),
+    path('albums/song/<int:item>/change', views.song_update, name='track_update'),
+    path('albums/song/<int:item>/delete', views.song_delete, name='track_delete'),
 ]
 #
 # path('albums/album/<int:pk>/content', views.tracks_load, name='track_loader'),

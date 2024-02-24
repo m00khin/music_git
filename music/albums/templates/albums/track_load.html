@@ -3,12 +3,16 @@
         <td>{{ song.track_no }}.</td>
         <td>{{ song.track_name }}</td>
         <td>{{ song.track_artist }}</td>
-        <td>{{ song.track_time|time:'H:i:s' }}</td>
-        <td class="text-center">
-            <a href="#">
+        <td>{{ song.track_time|time:"H:i:s" }}</td>
+        <td class="d-flex justify-content-evenly">
+            <a
+                hx-get="{% url 'track_update' item=song.id %}"
+                hx-target="#dialog">
                 <i class="bi bi-pencil text-warning"></i>
             </a>
-            <a href="#">
+            <a
+                hx-get="{% url 'track_delete' item=song.id %}"
+                hx-target="#dialog">
                 <i class="bi bi-trash text-danger"></i>
             </a>
         </td>
