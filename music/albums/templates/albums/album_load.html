@@ -10,15 +10,9 @@
     hx-target="this">
 </div>
 
-{#<div hx-trigger="load, songsChanged from:body"#}
-{#     hx-get="{% url 'track_loader' pk=album.pk %}"#}
-{#     hx-target="this">#}
-{#</div>#}
-
 <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false">
 	<div class="modal-dialog" id="dialog" hx-target="this"></div>
 </div>
-
 
 {% include 'include/footer.html' %}
 

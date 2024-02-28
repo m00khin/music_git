@@ -25,8 +25,6 @@ def album_create(request):
         if form.is_valid():
             form.save()
             return HttpResponse(status=204, headers={'HX-Trigger': 'albumsChanged'})
-        # else:
-        #     return render(request, 'albums/album_form.html', {'form': form})
     else:
         form = AlbumsForm()
         context = dict(form=form, title='Добавление нового альбома')

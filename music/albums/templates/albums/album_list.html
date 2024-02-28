@@ -2,54 +2,50 @@
 
 {% block content %}
 
-<div class="d-flex flex-row justify-content-between">
-    <div class="p-2 flex-column">
+<nav class="navbar navbar-expand-md align-items-start fixed-right">
+    <button
+        hx-get="{% url 'album_create' %}"
+        hx-target="#dialog"
+        class="btn btn-sm btn-outline-primary block mr-auto">Добавить
+    </button>
+</nav>
 
-        {% for album in albums %}
+<main class="p-2 col-sm-11">
+    {% for album in albums %}
 
-        <div class="p-1 mb-1 float-start" style="box-shadow: 4px 4px 4px #cccccc">
-            <div class="position-relative" style="color:white;">
-                <img src="covers/{{ album.cover }}" alt="">
-                <a hx-get="{% url 'album_tracks' pk=album.pk %}"
-                   hx-target="#dialog">
-                   <span class="bi bi-info-circle p-1 position-absolute bottom-0 end-0 fs-5"></span>
-                </a>
-            </div>
-
-            <div class="d-flex">
-                <div class="w-100 align-items-baseline" style="font-size: smaller">
-                    <div class="text-center fw-semibold">
-                       {{ album.artist }}
-                    </div>
-
-                    <div class="text-center fst-italic">
-                       {{ album.name }} <i class="bi bi-c-circle"></i> {{ album.year }}
-                    </div>
-                </div>
-
-                <a hx-get="{% url 'album_update' pk=album.pk %}"
-                   hx-target="#dialog"
-                   class="flex-shrink-1 align-self-center">
-                   <span class="bi bi-pencil-square pe-1 fs-5"></span>
-                </a>
-            </div>
+    <div class="p-1 mb-1 float-start" style="box-shadow: 4px 4px 4px #cccccc">
+        <div class="position-relative" style="color:white;">
+            <img src="covers/{{ album.cover }}" alt="">
+            <a hx-get="{% url 'album_tracks' pk=album.pk %}"
+               hx-target="#dialog">
+               <span class="bi bi-info-circle p-1 position-absolute bottom-0 end-0 fs-5"></span>
+            </a>
         </div>
 
-        {% empty %}
+        <div class="d-flex">
+            <div class="w-100 align-items-baseline" style="font-size: smaller">
+                <div class="text-center fw-semibold">
+                   {{ album.artist }}
+                </div>
 
-            <p class="p-2 w-100 fs-6 text-center text-danger">В базе нет записей</p>
+                <div class="text-center fst-italic">
+                   {{ album.name }} <i class="bi bi-c-circle"></i> {{ album.year }}
+                </div>
+            </div>
 
-        {% endfor %}
-
+            <a hx-get="{% url 'album_update' pk=album.pk %}"
+               hx-target="#dialog"
+               class="flex-shrink-1 align-self-center">
+               <span class="bi bi-pencil-square pe-1 fs-5"></span>
+            </a>
+        </div>
     </div>
-    <div class="p-2 flex-column flex-shrink-1">
-        <button
-            hx-get="{% url 'album_create' %}"
-            hx-target="#dialog"
-            class="btn btn-sm btn-outline-primary block mr-auto">Добавить
-        </button>
-    </div>
-</div>
+
+    {% empty %}
+        <p class="p-2 w-100 fs-6 text-center text-danger">В базе нет записей</p>
+
+    {% endfor %}
+</main>
 
 {% endblock %}
 
