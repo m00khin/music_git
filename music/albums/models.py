@@ -43,7 +43,7 @@ class Album(models.Model):
 
 
 class Song(models.Model):
-    album_key = models.ForeignKey(Album, related_name='Songs', verbose_name='Album', on_delete=models.CASCADE)
+    album_key = models.ForeignKey(Album, related_name='songs', verbose_name='Album', on_delete=models.CASCADE)
     track_no = models.PositiveSmallIntegerField(default=None, verbose_name='Track')
     track_name = models.CharField(max_length=128, verbose_name='Song')
     track_artist = models.CharField(max_length=128, verbose_name='Artist')
