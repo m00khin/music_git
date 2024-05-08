@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'albums.apps.AlbumsConfig',
     'rest_framework',
 ]
-    # 'django_filters',
+    # 'django_filter',
+
 
 
 MIDDLEWARE = [
@@ -145,11 +146,13 @@ MEDIA_URL = '/covers/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+APPEND_SLASH = False
+
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
 # REST_FRAMEWORK = {
-#     'DEFAULT_FILTER_BACKENDS': (
+#     'DEFAULT_FILTER_BACKENDS': [
 #         'django_filters.rest_framework.DjangoFilterBackend',
-#      ),
+#      ],
 # }

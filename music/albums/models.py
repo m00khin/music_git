@@ -69,4 +69,5 @@ class Song(models.Model):
     class Meta:
         verbose_name = 'Композиции'
         verbose_name_plural = 'Композиции'
+        unique_together = ['album_key', 'track_no']
         ordering = ['track_no']

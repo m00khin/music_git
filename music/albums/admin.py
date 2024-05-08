@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import *
+
+
 # from django.forms import widgets
 
 
@@ -12,10 +14,11 @@ class AlbumAdmin(admin.ModelAdmin):
     # list_filter = ('is_published', 'time_create')
     # prepopulated_fields = {"slug": ("title",)}
 
+
 @admin.register(Song)
 class SoundAdmin(admin.ModelAdmin):
     list_display = ('album_key', 'track_no', 'track_name', 'track_artist', 'length')
-    list_display_links = ('track_name', )
+    list_display_links = ('track_name',)
     search_fields = ('track_name', 'track_artist')
 
     def length(self, obj):

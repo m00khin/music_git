@@ -1,3 +1,4 @@
+import os
 import shutil
 from django.conf import settings
 from django.http import HttpResponse
@@ -60,8 +61,9 @@ def album_delete(request, pk):
 def album_remove(request, pk):
     album = get_object_or_404(Album, pk=pk)
     tree_path = cover_tree(album)
-    # album.cover.name.delete()
-    shutil.rmtree(tree_path, ignore_errors=False)
+    if os.path.exists(tree_path):
+        shutil.rmtree(tree_path, ignore_errors=False)
+        # album.cover.name.delete()
     album.delete()
     return HttpResponse(status=204, headers={'HX-Trigger': 'albumsChanged'})
 
