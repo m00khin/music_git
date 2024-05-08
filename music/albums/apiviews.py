@@ -20,7 +20,6 @@ class AlbumsListView(APIView):
         print(request.FILES)
         print(request.data)
         return Response({'received data': request.data})
-
         # serializer = AlbumSerializer(data=request.data)
         # if serializer.is_valid(raise_exception=True):
         #     serializer.save()
