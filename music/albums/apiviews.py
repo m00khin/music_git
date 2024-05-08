@@ -19,10 +19,8 @@ class AlbumsListView(APIView):
     def post(self, request):
         print(request.FILES)
         print(request.data)
-        serializer = AlbumSerializer(data=request.data)
-
         return Response({'received data': request.data})
-
+        # serializer = AlbumSerializer(data=request.data)
         # if serializer.is_valid(raise_exception=True):
         #     serializer.save()
         #     return Response(serializer.data, status=status.HTTP_201_CREATED)
