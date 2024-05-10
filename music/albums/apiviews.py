@@ -4,27 +4,34 @@ from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from .serializers import *
 
 
 class AlbumsListView(APIView):
     # parser_classes = (FileUploadParser, MultiPartParser, FormParser)
-    parser_classes = (MultiPartParser, FormParser)
+    # parser_classes = (MultiPartParser, FormParser)
+    parser_classes = (MultiPartParser, )
+
     def get(self, request):
         queryset = Album.objects.all()
         serializer = AlbumSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    def post(self, request):
+# """
+# https://stackoverflow.com/questions/46965670/how-to-use-multipartparser-in-django-rest-framework
+# """
+    def post(self, request, format=None):
         print(request.FILES)
         print(request.data)
-        return Response({'received data': request.data})
-        # serializer = AlbumSerializer(data=request.data)
-        # if serializer.is_valid(raise_exception=True):
-        #     serializer.save()
-        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
+        serializer = AlbumSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            # serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return JsonResponse({'received data': serializer.data})
+        # return Response({'received data': request.data})
+        # serializer = AlbumSerializer(data=request.data)
 
 
 class AlbumDetailView(APIView):
