@@ -3,6 +3,7 @@ from .models import *
 
 
 class AlbumSerializer(serializers.ModelSerializer):
+    # picture = serializers.FileField()
     class Meta:
         model = Album
         # fields = ['id', 'artist', 'name', 'year', 'maker']
@@ -18,9 +19,8 @@ class AlbumSerializer(serializers.ModelSerializer):
 class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Song
-        fields = ['track_no', 'track_name', 'track_artist', 'track_time']
-        # fields = ['album_key', 'track_no', 'track_name', 'track_artist', 'track_time']
-        # exclude = ['album_key']
+        # fields = ['track_no', 'track_name', 'track_artist', 'track_time']
+        exclude = ['id', 'album_key']
 
 
 class AlbumDetailSerializer(serializers.ModelSerializer):
@@ -31,12 +31,3 @@ class AlbumDetailSerializer(serializers.ModelSerializer):
         # fields = ['id', 'artist', 'name', 'year', 'maker', 'cover', 'songs']
         fields = ['id', 'artist', 'name', 'year', 'maker', 'songs']
         depth = 1
-
-
-class SongDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Song
-        fields = ['track_no', 'track_name', 'track_artist', 'track_time']
-        # fields = ['album_key', 'track_no', 'track_name', 'track_artist', 'track_time']
-        # fields = '__all__'
-        # depth = 1
