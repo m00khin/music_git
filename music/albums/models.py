@@ -49,15 +49,6 @@ class Song(models.Model):
     track_artist = models.CharField(max_length=128, verbose_name='Artist')
     track_time = models.TimeField(default='00:00:00', verbose_name='Length')
 
-    # def save(self, *args, **kwargs):
-    #     if not self.pk:
-    #         next_track = self.album_key.Songs.all().order_by('track_no').last()
-    #         if not next_track:
-    #             self.track_no = 1
-    #         else:
-    #             self.track_no += 1
-    #     super(Song, self).save(*args, **kwargs)
-
     def __str__(self):
         # return self.track_time.strftime("%H:%M:%S")
         return str(self.pk)
